@@ -8,11 +8,27 @@ spring:
 #    It is used to identify all the services registered in eureka server
   cloud:
     gateway:
-      discovery:
-        locator:
-          enabled: true
+
+#      Now we do not have to specify the service name in url
+      routes:
+        - id: CURRENCY-EXCHANGE-SERVICE
+          uri: lb://CURRENCY-EXCHANGE-SERVICE
+          predicates:
+            - Path= /currency-exchange/**
+        - id: AUTHENTICATION-SERVICE
+          uri: lb://AUTHENTICATION-SERVICE
+          predicates:
+            - Path= /auth/**
+
+
+
+#      discovery:
+#        locator:
+#          enabled: true
+
 #          To make service id in lower case
-          lowerCaseServiceId: true
+#          lowerCaseServiceId: true
+
 
 #It is not needed to be client of eureka server but for security we did it
 eureka:
