@@ -15,6 +15,9 @@ spring:
           uri: lb://CURRENCY-EXCHANGE-SERVICE
           predicates:
             - Path= /currency-exchange/**
+          filters:
+            - AuthenticationFilter
+
         - id: AUTHENTICATION-SERVICE
           uri: lb://AUTHENTICATION-SERVICE
           predicates:
